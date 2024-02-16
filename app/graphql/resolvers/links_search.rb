@@ -26,6 +26,9 @@ class Resolvers::LinksSearch
     scope.merge branches
   end
 
+  private
+
+  # 再帰的にORでフィルタリングできるようにしている
   def normalize_filters(value, branches = [])
     scope = Link.all
     scope = scope.where('description LIKE ?', "%#{value[:description_contains]}%") if value[:description_contains]
